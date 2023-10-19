@@ -17,3 +17,15 @@ data = response.json()
 access_token = data.get("oauth", {}).get("access_token")
 
 
+url = "https://api.baubuddy.de/dev/index.php/v1/vehicles/select/active"
+headers={
+     "Authorization": f"Bearer {access_token}"
+}
+response = requests.get(url, headers=headers)
+if response.status_code ==200:
+    csv_data = response.text
+    with open("output.csv", "w") as f:
+
+        f.write(csv_data)
+else:
+    print("ERROR:", response.status_code)
