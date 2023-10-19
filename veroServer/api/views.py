@@ -15,3 +15,5 @@ headers = {
 response = requests.post(url, json=payload, headers=headers)
 data = response.json()
 access_token = data.get("oauth", {}).get("access_token")
+
+
