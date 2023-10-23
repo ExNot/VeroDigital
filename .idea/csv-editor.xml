@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\veroServer\merged_data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\veroServer\output.csv">
           <value>
             <Attribute>
@@ -17,10 +24,10 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\veroServer\output_utf8.csv">
+        <entry key="\veroServer\vehicles.csv">
           <value>
             <Attribute>
-              <option name="separator" value=":" />
+              <option name="separator" value=";" />
             </Attribute>
           </value>
         </entry>
