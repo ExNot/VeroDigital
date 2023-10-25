@@ -4,6 +4,9 @@ import requests
 import json
 import pandas as pd
 import numpy as np
+import warnings
+
+#warnings.filterwarnings("ignore") #if wanna ignore the warning : A value is trying to be set on a copy of a slice from a DataFrame.Try using .loc[row_indexer,col_indexer] = value instead
 
 def get_access_token():
 
@@ -61,22 +64,20 @@ if response.status_code == 200:
 
     hu_filtered_df = merged_df[merged_df['hu'].notna()]
 
-    hu_filtered_df = hu_filtered_df.replace("NaN", np.nan)
-
-    hu_filtered_df['profilePictureUrl'] = hu_filtered_df['profilePictureUrl'].apply(lambda x: None if pd.isna(x) else x)
-    hu_filtered_df['thumbPathUrl'] = hu_filtered_df['thumbPathUrl'].apply(lambda x: None if pd.isna(x) else x)
 
 
+
+
+
+    #hu_filtered_df.at[0, 'labelIds'] = 76
+    hu_filtered_df['colorCode'] = None
     for column in hu_filtered_df.columns:
         hu_filtered_df.loc[hu_filtered_df[column].isin(["nan", "", "NaN"]), column] = None
 
-
-
     for index, row in hu_filtered_df.iterrows():
-        label_id = row['labelIds']
 
-        #if label_id != "nan":
-        if label_id == "sdkgg":
+        label_id = row['labelIds']
+        if label_id is not None:
             url= f'https://api.baubuddy.de/dev/index.php/v1/labels/{label_id}'
             headers = {
                 "Authorization": f"Bearer {get_access_token()}"
@@ -84,23 +85,25 @@ if response.status_code == 200:
             response = requests.get(url, headers=headers)
 
             if response.status_code ==200:
+
                 label_data = response.json()
                 color_code = label_data[0]['colorCode']
-                hu_filtered_df.at[index, 'colorCode'] = str(color_code)
+                color_code = str(color_code)
+                hu_filtered_df.at[index, 'colorCode'] = color_code
 
             else:
                 print(f'Error: There is no true formatted colorCode: {label_id}')
 
 
 
+    hu_filtered_df['colorCode'] = hu_filtered_df['colorCode'].apply(lambda x: None if pd.isna(x) else x)
+    hu_filtered_df['profilePictureUrl'] = hu_filtered_df['profilePictureUrl'].apply(lambda x: None if pd.isna(x) else x)
+    hu_filtered_df['thumbPathUrl'] = hu_filtered_df['thumbPathUrl'].apply(lambda x: None if pd.isna(x) else x)
 
 
     hu_filtered_df = hu_filtered_df.to_dict(orient='records')
     with open('filtered_data.json', 'w', encoding="utf-8") as merged_json_file:
         json.dump(hu_filtered_df, merged_json_file, ensure_ascii=False, indent=4)
-
-
-
 
 
 else:

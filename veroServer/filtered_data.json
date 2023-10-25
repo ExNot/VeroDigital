@@ -27,7 +27,8 @@
         "vin": null,
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_10/Bilder/IMG_20180120_0953251318581889.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_10/Bilder/Thumbs/IMG_20180120_0953251318581889.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_10/Bilder/Thumbs/IMG_20180120_0953251318581889.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "LKW",
@@ -57,7 +58,8 @@
         "vin": null,
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_11/Bilder/IMG_20171124_13323798491120.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_11/Bilder/Thumbs/IMG_20171124_13323798491120.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_11/Bilder/Thumbs/IMG_20171124_13323798491120.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "LKW",
@@ -87,7 +89,8 @@
         "vin": null,
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_15/Bilder/IMG_20171124_1334061711737662.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_15/Bilder/Thumbs/IMG_20171124_1334061711737662.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_15/Bilder/Thumbs/IMG_20171124_1334061711737662.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "LKW",
@@ -117,7 +120,8 @@
         "vin": null,
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": null,
-        "thumbPathUrl": null
+        "thumbPathUrl": null,
+        "colorCode": null
     },
     {
         "gruppe": "Anhänger",
@@ -147,7 +151,8 @@
         "vin": null,
         "bleGroupEnum": null,
         "profilePictureUrl": null,
-        "thumbPathUrl": null
+        "thumbPathUrl": null,
+        "colorCode": null
     },
     {
         "gruppe": "Anhänger",
@@ -177,7 +182,8 @@
         "vin": null,
         "bleGroupEnum": null,
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_21/Bilder/IMG_20171124_13304949851817.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_21/Bilder/Thumbs/IMG_20171124_13304949851817.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_21/Bilder/Thumbs/IMG_20171124_13304949851817.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "Anhänger",
@@ -207,7 +213,8 @@
         "vin": null,
         "bleGroupEnum": null,
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_22/Bilder/IMG_20171124_1330031963342155.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_22/Bilder/Thumbs/IMG_20171124_1330031963342155.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_22/Bilder/Thumbs/IMG_20171124_1330031963342155.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "Anhänger",
@@ -237,7 +244,8 @@
         "vin": null,
         "bleGroupEnum": null,
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_23/Bilder/2023-09-13_12-17-19-1000004748-209-23-1000004748.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_23/Bilder/Thumbs/2023-09-13_12-17-19-1000004748-209-23-1000004748.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_23/Bilder/Thumbs/2023-09-13_12-17-19-1000004748-209-23-1000004748.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "Anhänger",
@@ -267,7 +275,8 @@
         "vin": null,
         "bleGroupEnum": null,
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_24/Bilder/IMG_20171124_133617515871853.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_24/Bilder/Thumbs/IMG_20171124_133617515871853.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_24/Bilder/Thumbs/IMG_20171124_133617515871853.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "Transporter",
@@ -297,7 +306,8 @@
         "vin": null,
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": null,
-        "thumbPathUrl": null
+        "thumbPathUrl": null,
+        "colorCode": null
     },
     {
         "gruppe": "Transporter",
@@ -327,7 +337,8 @@
         "vin": null,
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": null,
-        "thumbPathUrl": null
+        "thumbPathUrl": null,
+        "colorCode": null
     },
     {
         "gruppe": "Transporter",
@@ -357,7 +368,8 @@
         "vin": null,
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_33/Bilder/2023-08-23_07-15-29-1000004111-209-33-1000004111.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_33/Bilder/Thumbs/2023-08-23_07-15-29-1000004111-209-33-1000004111.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_33/Bilder/Thumbs/2023-08-23_07-15-29-1000004111-209-33-1000004111.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "Transporter",
@@ -387,7 +399,8 @@
         "vin": null,
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_34/Bilder/IMG_20171124_151517912268151.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_34/Bilder/Thumbs/IMG_20171124_151517912268151.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_34/Bilder/Thumbs/IMG_20171124_151517912268151.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "LKW",
@@ -417,7 +430,8 @@
         "vin": null,
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": null,
-        "thumbPathUrl": null
+        "thumbPathUrl": null,
+        "colorCode": null
     },
     {
         "gruppe": "Lieferwagen",
@@ -447,7 +461,8 @@
         "vin": null,
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": null,
-        "thumbPathUrl": null
+        "thumbPathUrl": null,
+        "colorCode": null
     },
     {
         "gruppe": "LKW",
@@ -477,7 +492,8 @@
         "vin": null,
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_45/Bilder/2019-06-28_13-03-08--314-45-IMG_20190628_1502539200627595407225804.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_45/Bilder/Thumbs/2019-06-28_13-03-08--314-45-IMG_20190628_1502539200627595407225804.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_45/Bilder/Thumbs/2019-06-28_13-03-08--314-45-IMG_20190628_1502539200627595407225804.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "Hand - Werkzeug",
@@ -507,7 +523,8 @@
         "vin": "72252",
         "bleGroupEnum": null,
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_49/Bilder/2021-01-07_11-31-20-eb9da44a-dcb1-477a-9527-cc972d8a0a0b-341-49-eb9da44a-dcb1-477a-9527-cc972d8a0a0b.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_49/Bilder/Thumbs/2021-01-07_11-31-20-eb9da44a-dcb1-477a-9527-cc972d8a0a0b-341-49-eb9da44a-dcb1-477a-9527-cc972d8a0a0b.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_49/Bilder/Thumbs/2021-01-07_11-31-20-eb9da44a-dcb1-477a-9527-cc972d8a0a0b-341-49-eb9da44a-dcb1-477a-9527-cc972d8a0a0b.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "Hand - Werkzeug",
@@ -537,7 +554,8 @@
         "vin": "72253",
         "bleGroupEnum": null,
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_50/Bilder/2021-01-07_12-18-48-f6d764d7-c783-43d7-aa67-fcad5cd8f0ab-341-50-f6d764d7-c783-43d7-aa67-fcad5cd8f0ab.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_50/Bilder/Thumbs/2021-01-07_12-18-48-f6d764d7-c783-43d7-aa67-fcad5cd8f0ab-341-50-f6d764d7-c783-43d7-aa67-fcad5cd8f0ab.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_50/Bilder/Thumbs/2021-01-07_12-18-48-f6d764d7-c783-43d7-aa67-fcad5cd8f0ab-341-50-f6d764d7-c783-43d7-aa67-fcad5cd8f0ab.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "Hand - Werkzeug",
@@ -567,7 +585,8 @@
         "vin": "72254",
         "bleGroupEnum": null,
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_51/Bilder/2021-01-07_12-20-46-03f7424a-db03-4e55-8f2e-71015859d641-341-51-03f7424a-db03-4e55-8f2e-71015859d641.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_51/Bilder/Thumbs/2021-01-07_12-20-46-03f7424a-db03-4e55-8f2e-71015859d641-341-51-03f7424a-db03-4e55-8f2e-71015859d641.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_51/Bilder/Thumbs/2021-01-07_12-20-46-03f7424a-db03-4e55-8f2e-71015859d641-341-51-03f7424a-db03-4e55-8f2e-71015859d641.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "LKW",
@@ -597,7 +616,8 @@
         "vin": "WDB6760031N819032",
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_54/Bilder/2021-07-20_16-25-45-LKW_von_vorn-314-54-IMG_20210720_1825341706213307345664245.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_54/Bilder/Thumbs/2021-07-20_16-25-45-LKW_von_vorn-314-54-IMG_20210720_1825341706213307345664245.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_54/Bilder/Thumbs/2021-07-20_16-25-45-LKW_von_vorn-314-54-IMG_20210720_1825341706213307345664245.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "LKW",
@@ -627,7 +647,8 @@
         "vin": "WDB9036221R523538",
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_63/Bilder/2023-08-03_07-00-14-IMG_20230803_085325701_HDR-209-IMG_20230803_085325701_HDR.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_63/Bilder/Thumbs/2023-08-03_07-00-14-IMG_20230803_085325701_HDR-209-IMG_20230803_085325701_HDR.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_63/Bilder/Thumbs/2023-08-03_07-00-14-IMG_20230803_085325701_HDR-209-IMG_20230803_085325701_HDR.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "LKW",
@@ -657,7 +678,8 @@
         "vin": "WDB9702351K377137",
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_66/Bilder/2023-08-03_06-42-55-PB-_VR_70-209-66-PB-_VR_70.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_66/Bilder/Thumbs/2023-08-03_06-42-55-PB-_VR_70-209-66-PB-_VR_70.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_66/Bilder/Thumbs/2023-08-03_06-42-55-PB-_VR_70-209-66-PB-_VR_70.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "317 CDI",
@@ -687,7 +709,8 @@
         "vin": null,
         "bleGroupEnum": null,
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_71/Bilder/2023-02-28_12-02-27-PB_VR_555-327-71-PB_VR_555.PNG",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_71/Bilder/Thumbs/2023-02-28_12-02-27-PB_VR_555-327-71-PB_VR_555.PNG"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_71/Bilder/Thumbs/2023-02-28_12-02-27-PB_VR_555-327-71-PB_VR_555.PNG",
+        "colorCode": null
     },
     {
         "gruppe": "PKW",
@@ -717,7 +740,8 @@
         "vin": null,
         "bleGroupEnum": "VEHICLE",
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_102/Bilder/2023-08-15_07-15-38-1000003939-209-102-1000003939.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_102/Bilder/Thumbs/2023-08-15_07-15-38-1000003939-209-102-1000003939.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_102/Bilder/Thumbs/2023-08-15_07-15-38-1000003939-209-102-1000003939.jpg",
+        "colorCode": null
     },
     {
         "gruppe": "Eigenfahrzeug",
@@ -747,6 +771,7 @@
         "vin": null,
         "bleGroupEnum": null,
         "profilePictureUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_118/Bilder/2023-10-23_06-02-06-PXL_20231023_055820791-327-118-PXL_20231023_055820791.jpg",
-        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_118/Bilder/Thumbs/2023-10-23_06-02-06-PXL_20231023_055820791-327-118-PXL_20231023_055820791.jpg"
+        "thumbPathUrl": "https://api.baubuddy.de/dev/infomaterial/Dokumente_vero_test/RNR_118/Bilder/Thumbs/2023-10-23_06-02-06-PXL_20231023_055820791-327-118-PXL_20231023_055820791.jpg",
+        "colorCode": null
     }
 ]
