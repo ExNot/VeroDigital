@@ -6,29 +6,12 @@ import pandas as pd
 import numpy as np
 import warnings
 from django.shortcuts import render
-from django import forms
 
-from veroClient.client import CSVFileUploadForm
+
+
 
 
 #warnings.filterwarnings("ignore") #if wanna ignore the warning : A value is trying to be set on a copy of a slice from a DataFrame.Try using .loc[row_indexer,col_indexer] = value instead
-
-def upload_csv(request):
-    if request.method == 'POST':
-        form = CSVFileUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            csv_file = form.cleaned_data['file']
-            # Burada CSV dosyasını işleyebilirsiniz
-            # Örnek: csv_file.read() ile dosyanın içeriğini alabilirsiniz
-
-
-
-
-            return render(request, 'success.html', {'message': 'CSV dosyası başarıyla yüklendi ve işlendi.'})
-    else:
-        form = CSVFileUploadForm()
-    return render(request, 'upload.html', {'form': form})
-
 
 def get_access_token():
 
@@ -47,86 +30,96 @@ def get_access_token():
     return access_token
 
 
-url = "https://api.baubuddy.de/dev/index.php/v1/vehicles/select/active"
-headers = {
-    "Authorization": f"Bearer {get_access_token()}"
-}
+
+
 print(get_access_token())
-response = requests.get(url, headers=headers)
-if response.status_code == 200:
 
-    json_data = response.json()
-
-    csv_data = pd.read_csv('vehicles.csv', sep=';')
-    json_data_df = pd.DataFrame(json_data)
-
-
-    merged_df = csv_data.merge(json_data_df, on='kurzname', how='outer')
-
-
-
-    merged_df['labelIds_x'] = merged_df['labelIds_x'].astype(str)
-    merged_df['labelIds_y'] = merged_df['labelIds_y'].astype(str)
-
-
-    merged_df['gruppe_x'].fillna(merged_df['gruppe_y'], inplace=True)
-    merged_df['langtext_x'].fillna(merged_df['langtext_y'], inplace=True)
-    merged_df['info_x'].fillna(merged_df['info_y'], inplace=True)
-    merged_df['lagerort_x'].fillna(merged_df['lagerort_y'], inplace=True)
-    merged_df['labelIds_x'].fillna(merged_df['labelIds_y'], inplace=True)
-
-
-
-
-
-
-    merged_df = merged_df.drop(['gruppe_y', 'langtext_y', 'info_y', 'lagerort_y', 'labelIds_y'], axis=1)
-    merged_df.columns = merged_df.columns.str.rstrip('_x')
-
-
-    hu_filtered_df = merged_df[merged_df['hu'].notna()]
-
-
-
-
-
-
-    #hu_filtered_df.at[0, 'labelIds'] = 76
-    hu_filtered_df['colorCode'] = None
-    for column in hu_filtered_df.columns:
-        hu_filtered_df.loc[hu_filtered_df[column].isin(["nan", "", "NaN"]), column] = None
-
-    for index, row in hu_filtered_df.iterrows():
-
-        label_id = row['labelIds']
-        if label_id is not None:
-            url= f'https://api.baubuddy.de/dev/index.php/v1/labels/{label_id}'
+def upload_csv(request):
+    if request.method == 'POST':
+        form = CSVFileUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            csv_file = form.cleaned_data['file']
+            # Burada CSV dosyasını işleyebilirsiniz
+            # Örnek: csv_file.read() ile dosyanın içeriğini alabilirsiniz
+            url = "https://api.baubuddy.de/dev/index.php/v1/vehicles/select/active"
             headers = {
                 "Authorization": f"Bearer {get_access_token()}"
             }
+
             response = requests.get(url, headers=headers)
+            if response.status_code == 200:
 
-            if response.status_code ==200:
+                json_data = response.json()
 
-                label_data = response.json()
-                color_code = label_data[0]['colorCode']
-                color_code = str(color_code)
-                hu_filtered_df.at[index, 'colorCode'] = color_code
+                #csv_data = pd.read_csv('vehicles.csv', sep=';')
+
+                csv_data = csv_file.read()
+
+                json_data_df = pd.DataFrame(json_data)
+
+                merged_df = csv_data.merge(json_data_df, on='kurzname', how='outer')
+
+                merged_df['labelIds_x'] = merged_df['labelIds_x'].astype(str)
+                merged_df['labelIds_y'] = merged_df['labelIds_y'].astype(str)
+
+                merged_df['gruppe_x'].fillna(merged_df['gruppe_y'], inplace=True)
+                merged_df['langtext_x'].fillna(merged_df['langtext_y'], inplace=True)
+                merged_df['info_x'].fillna(merged_df['info_y'], inplace=True)
+                merged_df['lagerort_x'].fillna(merged_df['lagerort_y'], inplace=True)
+                merged_df['labelIds_x'].fillna(merged_df['labelIds_y'], inplace=True)
+
+                merged_df = merged_df.drop(['gruppe_y', 'langtext_y', 'info_y', 'lagerort_y', 'labelIds_y'], axis=1)
+                merged_df.columns = merged_df.columns.str.rstrip('_x')
+
+                hu_filtered_df = merged_df[merged_df['hu'].notna()]
+
+                # hu_filtered_df.at[0, 'labelIds'] = 76
+                hu_filtered_df['colorCode'] = None
+                for column in hu_filtered_df.columns:
+                    hu_filtered_df.loc[hu_filtered_df[column].isin(["nan", "", "NaN"]), column] = None
+
+                for index, row in hu_filtered_df.iterrows():
+
+                    label_id = row['labelIds']
+                    if label_id is not None:
+                        url = f'https://api.baubuddy.de/dev/index.php/v1/labels/{label_id}'
+                        headers = {
+                            "Authorization": f"Bearer {get_access_token()}"
+                        }
+                        response = requests.get(url, headers=headers)
+
+                        if response.status_code == 200:
+
+                            label_data = response.json()
+                            color_code = label_data[0]['colorCode']
+                            color_code = str(color_code)
+                            hu_filtered_df.at[index, 'colorCode'] = color_code
+
+                        else:
+                            print(f'Error: There is no true formatted colorCode: {label_id}')
+
+                hu_filtered_df['colorCode'] = hu_filtered_df['colorCode'].apply(lambda x: None if pd.isna(x) else x)
+                hu_filtered_df['profilePictureUrl'] = hu_filtered_df['profilePictureUrl'].apply(
+                    lambda x: None if pd.isna(x) else x)
+                hu_filtered_df['thumbPathUrl'] = hu_filtered_df['thumbPathUrl'].apply(
+                    lambda x: None if pd.isna(x) else x)
+
+                hu_filtered_df = hu_filtered_df.to_dict(orient='records')
+                with open('filtered_data.json', 'w', encoding="utf-8") as merged_json_file:
+                    json.dump(hu_filtered_df, merged_json_file, ensure_ascii=False, indent=4)
+
 
             else:
-                print(f'Error: There is no true formatted colorCode: {label_id}')
+                print("ERROR:", response.status_code)
+
+
+            return render(request, 'success.html', {'message': 'CSV dosyası başarıyla yüklendi ve işlendi.'})
+    else:
+        form = CSVFileUploadForm()
+    return render(request, 'upload.html', {'form': form})
 
 
 
-    hu_filtered_df['colorCode'] = hu_filtered_df['colorCode'].apply(lambda x: None if pd.isna(x) else x)
-    hu_filtered_df['profilePictureUrl'] = hu_filtered_df['profilePictureUrl'].apply(lambda x: None if pd.isna(x) else x)
-    hu_filtered_df['thumbPathUrl'] = hu_filtered_df['thumbPathUrl'].apply(lambda x: None if pd.isna(x) else x)
 
 
-    hu_filtered_df = hu_filtered_df.to_dict(orient='records')
-    with open('filtered_data.json', 'w', encoding="utf-8") as merged_json_file:
-        json.dump(hu_filtered_df, merged_json_file, ensure_ascii=False, indent=4)
 
-
-else:
-    print("ERROR:", response.status_code)
