@@ -10,13 +10,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\veroClient\vehicles.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value=";" />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\veroServer\vehicles.csv">
           <value>
             <Attribute>
