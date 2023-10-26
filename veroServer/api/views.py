@@ -5,8 +5,30 @@ import json
 import pandas as pd
 import numpy as np
 import warnings
+from django.shortcuts import render
+from django import forms
+
+from veroClient.client import CSVFileUploadForm
+
 
 #warnings.filterwarnings("ignore") #if wanna ignore the warning : A value is trying to be set on a copy of a slice from a DataFrame.Try using .loc[row_indexer,col_indexer] = value instead
+
+def upload_csv(request):
+    if request.method == 'POST':
+        form = CSVFileUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            csv_file = form.cleaned_data['file']
+            # Burada CSV dosyasını işleyebilirsiniz
+            # Örnek: csv_file.read() ile dosyanın içeriğini alabilirsiniz
+
+
+
+
+            return render(request, 'success.html', {'message': 'CSV dosyası başarıyla yüklendi ve işlendi.'})
+    else:
+        form = CSVFileUploadForm()
+    return render(request, 'upload.html', {'form': form})
+
 
 def get_access_token():
 

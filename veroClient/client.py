@@ -6,6 +6,10 @@ from datetime import datetime
 import openpyxl
 from openpyxl.styles import PatternFill
 from openpyxl.workbook import Workbook
+from django.db import models
+from django import forms
+
+
 
 colored = True
 
@@ -30,6 +34,14 @@ def calculate_color_code_hu(hu):
         return "#b30000"
 
 
+class CSVData(models.Model):
+    file = models.FileField(upload_to='filtered_data.json')
+class CSVFileUploadForm(forms.Form):
+    file = forms.FileField()
+
+
+
+
 with open('filtered_data.json', 'r', encoding='utf-8') as json_file:
     data = json.load(json_file)
 
@@ -48,7 +60,7 @@ fill_green = PatternFill(start_color="007500", end_color="007500", fill_type="so
 fill_orange = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")
 fill_red = PatternFill(start_color="b30000", end_color="b30000", fill_type="solid")
 
-for _, row in df.iterrows():
+for _, row in data.iterrows():
     row_data = [row[column] for column in header]
     ws.append(row_data)
 
@@ -65,8 +77,8 @@ for _, row in df.iterrows():
         for row in ws.iter_rows(min_row=ws.max_row, max_row=ws.max_row, min_col=1, max_col=len(header)):
             for cell in row:
                 cell.fill = fill_red
-    
-print(data)
+
+
 wb.save('colored_vehicles.xlsx')
 
 
