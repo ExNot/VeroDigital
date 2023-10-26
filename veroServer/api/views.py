@@ -1,33 +1,16 @@
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
+
 import requests
 import json
 import pandas as pd
-import numpy as np
-import warnings
-from django.shortcuts import render
-from django import forms
+import csv
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
-from veroClient.client import CSVFileUploadForm
+import warnings
+
 
 
 #warnings.filterwarnings("ignore") #if wanna ignore the warning : A value is trying to be set on a copy of a slice from a DataFrame.Try using .loc[row_indexer,col_indexer] = value instead
-
-def upload_csv(request):
-    if request.method == 'POST':
-        form = CSVFileUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            csv_file = form.cleaned_data['file']
-            # Burada CSV dosyasını işleyebilirsiniz
-            # Örnek: csv_file.read() ile dosyanın içeriğini alabilirsiniz
-
-
-
-
-            return render(request, 'success.html', {'message': 'CSV dosyası başarıyla yüklendi ve işlendi.'})
-    else:
-        form = CSVFileUploadForm()
-    return render(request, 'upload.html', {'form': form})
 
 
 def get_access_token():
@@ -52,6 +35,7 @@ headers = {
     "Authorization": f"Bearer {get_access_token()}"
 }
 print(get_access_token())
+
 response = requests.get(url, headers=headers)
 if response.status_code == 200:
 
@@ -130,3 +114,19 @@ if response.status_code == 200:
 
 else:
     print("ERROR:", response.status_code)
+
+@csrf_exempt
+def upload_vehicles(request):
+    if request.method == 'POST':
+        csv_data = request.POST.get('csv_data', '')
+
+        if csv_data:
+            # CSV verisini işleyin (örneğin, veritabanına kaydedin veya başka bir işlem yapın)
+            # Bu örnekte CSV verisini sadece yazdırıyoruz
+            print(csv_data)
+
+            return JsonResponse({'message': 'CSV dosyası başarıyla işlendi.'})
+        else:
+            return JsonResponse({'error': 'CSV verisi eksik.'}, status=400)
+    else:
+        return JsonResponse({'error': 'Geçersiz istek methodu.'}, status=405)

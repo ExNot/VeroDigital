@@ -6,8 +6,22 @@ from datetime import datetime
 import openpyxl
 from openpyxl.styles import PatternFill
 from openpyxl.workbook import Workbook
-from django.db import models
-from django import forms
+
+
+
+with open('vehicles.csv', 'r', encoding='utf-8') as file:
+    csv_data = file.read()
+
+url = 'http://127.0.0.1:8000/api/upload-vehicles/'
+
+response = requests.post(url, data={'csv_data': csv_data})
+
+if response.status_code == 200:
+    print("success")
+else:
+    print("CSV dosyasını sunucuya gönderirken bir hata oluştu. HTTP Kodu:", response.status_code)
+
+
 
 
 
@@ -32,14 +46,6 @@ def calculate_color_code_hu(hu):
         return "#FFA500"
     else:
         return "#b30000"
-
-
-class CSVData(models.Model):
-    file = models.FileField(upload_to='filtered_data.json')
-class CSVFileUploadForm(forms.Form):
-    file = forms.FileField()
-
-
 
 
 with open('filtered_data.json', 'r', encoding='utf-8') as json_file:
