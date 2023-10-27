@@ -110,9 +110,6 @@ def upload_vehicles(request):
                     lambda x: None if pd.isna(x) else x)
 
                 hu_filtered_df = hu_filtered_df.to_dict(orient='records')
-                with open('filtered_data.json', 'w', encoding="utf-8") as merged_json_file:
-                    json.dump(hu_filtered_df, merged_json_file, ensure_ascii=False, indent=4)
-
 
             else:
                 print("ERROR:", response.status_code)
