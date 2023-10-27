@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\veroServer\csv_data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\veroServer\uploaded_file.csv">
           <value>
             <Attribute>

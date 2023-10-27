@@ -15,6 +15,7 @@ with open('vehicles.csv', 'r', encoding='utf-8') as file:
 url = 'http://127.0.0.1:8000/api/upload-vehicles/'
 
 response = requests.post(url, data={'csv_data': csv_data})
+data = response.json()
 
 if response.status_code == 200:
     print("success")
@@ -48,13 +49,22 @@ def calculate_color_code_hu(hu):
         return "#b30000"
 
 
-with open('filtered_data.json', 'r', encoding='utf-8') as json_file:
-    data = json.load(json_file)
 
-df = pd.DataFrame(data)
+json_data = data['data']
+print(json_data)
 
-#data = df.sort_values(by='gruppe')
+data_dict = json.loads(json_data)
+
+df = pd.DataFrame(data_dict)
+
 data = df.sort_values(by='gruppe')
+
+
+
+
+
+
+
 
 wb = Workbook()
 ws = wb.active

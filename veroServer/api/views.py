@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from io import StringIO
 import warnings
-
+from django.http import HttpResponse
 
 
 #warnings.filterwarnings("ignore") #if wanna ignore the warning : A value is trying to be set on a copy of a slice from a DataFrame.Try using .loc[row_indexer,col_indexer] = value instead
@@ -42,12 +42,13 @@ def upload_vehicles(request):
 
         csv_data = uploaded_file
 
-        df = pd.read_csv(StringIO(csv_data), sep=';')
+        df = pd.read_csv(StringIO(csv_data), sep=';', header=None)
         header_row = df.iloc[0]
         df = df[1:]
         df.columns = header_row
+        df = df.dropna(axis=1, how='all')
+        csv_data = df
 
-        csv_data = pd.concat([pd.DataFrame(header_row).T, df], ignore_index=True)
 
         if not csv_data.empty:
             url = "https://api.baubuddy.de/dev/index.php/v1/vehicles/select/active"
@@ -59,14 +60,7 @@ def upload_vehicles(request):
 
                 json_data = response.json()
 
-
                 json_data_df = pd.DataFrame(json_data)
-
-                print(type(csv_data))
-                print(type(json_data_df))
-                print(csv_data)
-                print("--------------------------------------------------")
-                print(json_data_df)
 
                 merged_df = csv_data.merge(json_data_df, on='kurzname', how='outer')
 
@@ -122,7 +116,11 @@ def upload_vehicles(request):
 
             else:
                 print("ERROR:", response.status_code)
-            return JsonResponse({'message': 'CSV dosyası başarıyla işlendi.'})
+
+            response = json.dumps(hu_filtered_df)
+            print(response)
+
+            return JsonResponse({'data': response}, safe=False)
         else:
             return JsonResponse({'error': 'CSV verisi eksik.'}, status=400)
     else:
