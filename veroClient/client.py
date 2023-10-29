@@ -73,8 +73,11 @@ df = pd.DataFrame(data_dict)
 
 data = df.sort_values(by='gruppe')
 
-selected_columns = ['rnr'] + args.keys
+selected_columns = ['rnr'] + [key for key in args.keys if key != 'colorCode' and key != 'labelIds']
 data_selected = data[selected_columns]
+
+color_selected = [key for key in args.keys if key == 'colorCode' or key == 'labelIds']
+color_selected = data[color_selected]
 
 header = data_selected.columns.tolist()
 
@@ -109,7 +112,7 @@ for _, row in data.iterrows():
                     cell.fill = fill_red
 
 if 'labelIds' in args.keys:
-    color_cod_col = data_selected['colorCode']
+    color_cod_col = color_selected['colorCode']
 
     for idx in range(len(color_cod_col)):
         color_code = color_cod_col.iloc[idx]
@@ -117,7 +120,6 @@ if 'labelIds' in args.keys:
             row = ws[idx+2]
             for cell in row:
                 cell.font = Font(color=color_code)
-
 
 
 
