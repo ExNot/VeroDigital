@@ -78,7 +78,7 @@ def upload_vehicles(request):
 
                 hu_filtered_df = merged_df[merged_df['hu'].notna()]
 
-                #hu_filtered_df.at[0, 'labelIds'] = 76
+                hu_filtered_df.at[0, 'labelIds'] = 76
                 hu_filtered_df['colorCode'] = None
                 for column in hu_filtered_df.columns:
                     hu_filtered_df.loc[hu_filtered_df[column].isin(["nan", "", "NaN"]), column] = None
@@ -97,7 +97,7 @@ def upload_vehicles(request):
 
                             label_data = response.json()
                             color_code = label_data[0]['colorCode']
-                            color_code = str(color_code)
+                            color_code = str(color_code[1:])
                             hu_filtered_df.at[index, 'colorCode'] = color_code
 
                         else:
