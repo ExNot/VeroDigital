@@ -3,9 +3,14 @@ import json
 import pandas as pd
 import numpy as np
 from datetime import datetime
-import openpyxl
+import openpyxl as px
 from openpyxl.styles import PatternFill
 from openpyxl.workbook import Workbook
+import datetime as dt
+
+
+_today = dt.date.today()
+today_iso = _today.strftime("%Y-%m-%d")
 
 
 
@@ -28,8 +33,9 @@ else:
 
 colored = True
 
+today = datetime.now()
 def calculate_color_code_hu(hu):
-    today = datetime.now()
+
 
     if hu is None:
         return None
@@ -51,20 +57,13 @@ def calculate_color_code_hu(hu):
 
 
 json_data = data['data']
-print(json_data)
+
 
 data_dict = json.loads(json_data)
 
 df = pd.DataFrame(data_dict)
 
 data = df.sort_values(by='gruppe')
-
-
-
-
-
-
-
 
 wb = Workbook()
 ws = wb.active
@@ -95,7 +94,8 @@ for _, row in data.iterrows():
                 cell.fill = fill_red
 
 
-wb.save('colored_vehicles.xlsx')
+filename = f'vehicles_{today_iso}.xlsx'
+wb.save(filename)
 
 
 
