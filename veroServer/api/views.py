@@ -1,16 +1,22 @@
-
 import requests
 import json
 import pandas as pd
+import csv
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from io import StringIO
+<<<<<<< HEAD
+=======
 import warnings
+from django.http import HttpResponse
+
 
 #warnings.filterwarnings("ignore") #if wanna ignore the warning : A value is trying to be set on a copy of a slice from a DataFrame.Try using .loc[row_indexer,col_indexer] = value instead
+>>>>>>> parent of ae195fe (commandLine)
+
+
 
 def get_access_token():
-
     url = "https://api.baubuddy.de/index.php/login"
     payload = {
         "username": "365",
@@ -25,20 +31,90 @@ def get_access_token():
     access_token = data.get("oauth", {}).get("access_token")
     return access_token
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> parent of ae195fe (commandLine)
+
+
 print(get_access_token())
 
+
+
+<<<<<<< HEAD
+>>>>>>> parent of ae195fe (commandLine)
+=======
+>>>>>>> parent of ae195fe (commandLine)
 @csrf_exempt
 def upload_vehicles(request):
     if request.method == 'POST':
         uploaded_file = request.POST.get('csv_data', '')
+
         csv_data = uploaded_file
 
+<<<<<<< HEAD
+        if not csv_data:
+            return JsonResponse({'error': 'Missing CSV file.'}, status=400)
+
+        df = pd.read_csv(StringIO(csv_data), sep=';', header=0)
+        df.dropna(axis=1, how='all', inplace=True)
+
+        access_token = get_access_token()
+        if not access_token:
+            return JsonResponse({'error': 'Failed to retrieve access token.'}, status=500)
+
+        url = "https://api.baubuddy.de/dev/index.php/v1/vehicles/select/active"
+        headers = {
+            "Authorization": f"Bearer {access_token}"
+        }
+
+        response = requests.get(url, headers=headers)
+        if response.status_code != 200:
+            return JsonResponse({'error': f'API request failed with status code {response.status_code}'}, status=500)
+
+        json_data = response.json()
+        json_data_df = pd.DataFrame(json_data)
+
+        merged_df = pd.merge(df, json_data_df, on='kurzname', how='outer')
+
+        merged_df.fillna(method='ffill', inplace=True)
+        merged_df.fillna('', inplace=True)
+
+        hu_filtered_df = merged_df[merged_df['hu'].notna()]
+        hu_filtered_df.at[0, 'labelIds'] = 76
+
+        for index, row in hu_filtered_df.iterrows():
+            label_id = row['labelIds']
+            if label_id:
+                url = f'https://api.baubuddy.de/dev/index.php/v1/labels/{label_id}'
+                headers = {
+                    "Authorization": f"Bearer {access_token}"
+                }
+                response = requests.get(url, headers=headers)
+
+                if response.status_code == 200:
+                    label_data = response.json()
+                    color_code = str(label_data[0]['colorCode'])[1:]
+                    hu_filtered_df.at[index, 'colorCode'] = color_code
+                else:
+                    print(f'Error: There is no true formatted colorCode: {label_id}')
+
+        hu_filtered_df['colorCode'].fillna('', inplace=True)
+        hu_filtered_df['profilePictureUrl'].fillna('', inplace=True)
+        hu_filtered_df['thumbPathUrl'].fillna('', inplace=True)
+
+        hu_filtered_dict = hu_filtered_df.to_dict(orient='records')
+
+        return JsonResponse({'data': hu_filtered_dict}, safe=False)
+=======
         df = pd.read_csv(StringIO(csv_data), sep=';', header=None)
         header_row = df.iloc[0]
         df = df[1:]
         df.columns = header_row
         df = df.dropna(axis=1, how='all')
         csv_data = df
+
 
         if not csv_data.empty:
             url = "https://api.baubuddy.de/dev/index.php/v1/vehicles/select/active"
@@ -68,7 +144,7 @@ def upload_vehicles(request):
 
                 hu_filtered_df = merged_df[merged_df['hu'].notna()]
 
-                hu_filtered_df.at[0, 'labelIds'] = 76 #For test
+                hu_filtered_df.at[0, 'labelIds'] = 76
                 hu_filtered_df['colorCode'] = None
                 for column in hu_filtered_df.columns:
                     hu_filtered_df.loc[hu_filtered_df[column].isin(["nan", "", "NaN"]), column] = None
@@ -108,6 +184,10 @@ def upload_vehicles(request):
 
             return JsonResponse({'data': response}, safe=False)
         else:
-            return JsonResponse({'error': 'Missing CSV file.'}, status=400)
+            return JsonResponse({'error': 'CSV verisi eksik.'}, status=400)
+<<<<<<< HEAD
+>>>>>>> parent of ae195fe (commandLine)
+=======
+>>>>>>> parent of ae195fe (commandLine)
     else:
-        return JsonResponse({'error': 'Invalid request method.'}, status=405)
+        return JsonResponse({'error': 'Geçersiz istek methodu.'}, status=405)
