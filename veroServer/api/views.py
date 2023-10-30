@@ -2,16 +2,12 @@
 import requests
 import json
 import pandas as pd
-import csv
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from io import StringIO
 import warnings
-from django.http import HttpResponse
-
 
 #warnings.filterwarnings("ignore") #if wanna ignore the warning : A value is trying to be set on a copy of a slice from a DataFrame.Try using .loc[row_indexer,col_indexer] = value instead
-
 
 def get_access_token():
 
@@ -29,17 +25,12 @@ def get_access_token():
     access_token = data.get("oauth", {}).get("access_token")
     return access_token
 
-
-
 print(get_access_token())
-
-
 
 @csrf_exempt
 def upload_vehicles(request):
     if request.method == 'POST':
         uploaded_file = request.POST.get('csv_data', '')
-
         csv_data = uploaded_file
 
         df = pd.read_csv(StringIO(csv_data), sep=';', header=None)
@@ -48,7 +39,6 @@ def upload_vehicles(request):
         df.columns = header_row
         df = df.dropna(axis=1, how='all')
         csv_data = df
-
 
         if not csv_data.empty:
             url = "https://api.baubuddy.de/dev/index.php/v1/vehicles/select/active"
@@ -78,7 +68,7 @@ def upload_vehicles(request):
 
                 hu_filtered_df = merged_df[merged_df['hu'].notna()]
 
-                hu_filtered_df.at[0, 'labelIds'] = 76
+                hu_filtered_df.at[0, 'labelIds'] = 76 #For test
                 hu_filtered_df['colorCode'] = None
                 for column in hu_filtered_df.columns:
                     hu_filtered_df.loc[hu_filtered_df[column].isin(["nan", "", "NaN"]), column] = None
@@ -118,6 +108,6 @@ def upload_vehicles(request):
 
             return JsonResponse({'data': response}, safe=False)
         else:
-            return JsonResponse({'error': 'CSV verisi eksik.'}, status=400)
+            return JsonResponse({'error': 'Missing CSV file.'}, status=400)
     else:
-        return JsonResponse({'error': 'Geçersiz istek methodu.'}, status=405)
+        return JsonResponse({'error': 'Invalid request method.'}, status=405)

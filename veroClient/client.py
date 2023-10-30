@@ -1,9 +1,7 @@
 import requests
 import json
 import pandas as pd
-import numpy as np
 from datetime import datetime
-import openpyxl as px
 from openpyxl.styles import PatternFill, Font
 from openpyxl.workbook import Workbook
 import datetime as dt
@@ -20,8 +18,6 @@ args = parser.parse_args()
 _today = dt.date.today()
 today_iso = _today.strftime("%Y-%m-%d")
 
-
-
 with open('vehicles.csv', 'r', encoding='utf-8') as file:
     csv_data = file.read()
 
@@ -30,31 +26,16 @@ url = 'http://127.0.0.1:8000/api/upload-vehicles/'
 response = requests.post(url, data={'csv_data': csv_data})
 data = response.json()
 
-if response.status_code == 200:
-    print("success")
-else:
-    print("CSV dosyasını sunucuya gönderirken bir hata oluştu. HTTP Kodu:", response.status_code)
-
-
-
-
-
-colored = True
-
 today = datetime.now()
 def calculate_color_code_hu(hu):
-
-
     if hu is None:
         return None
 
     hu_date = datetime.strptime(hu, "%Y-%m-%d")
-
     if hu_date > today:
         return None
 
     date_gap = today-hu_date
-
     if date_gap.days <90:
         return "#007500"
     elif 90<= date_gap.days <365:
@@ -62,16 +43,20 @@ def calculate_color_code_hu(hu):
     else:
         return "#b30000"
 
-
-
 json_data = data['data']
-
 
 data_dict = json.loads(json_data)
 
 df = pd.DataFrame(data_dict)
 
 data = df.sort_values(by='gruppe')
+
+if args.keys:
+    valid_args = data.columns
+    for arg in args.keys:
+        if arg not in valid_args:
+            print(f"Invalid argument: {arg}")
+            exit(1)
 
 selected_columns = ['rnr'] + [key for key in args.keys if key != 'colorCode' and key != 'labelIds']
 data_selected = data[selected_columns]
@@ -121,28 +106,5 @@ if 'labelIds' in args.keys:
             for cell in row:
                 cell.font = Font(color=color_code)
 
-
-
 filename = f'vehicles_{today_iso}.xlsx'
 wb.save(filename)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
