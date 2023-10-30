@@ -55,25 +55,21 @@ df = pd.DataFrame(data_dict)
 data = df.sort_values(by='gruppe')
 
 if args.keys:
-    valid_args = data.columns
+    valid_args = data.columns.drop('colorCode')
     for arg in args.keys:
         if arg not in valid_args:
             print(f"Invalid argument: {arg}")
             exit(1)
 
 # Select columns specified by arguments
-selected_columns = ['rnr'] + [key for key in args.keys if key != 'colorCode' and key != 'labelIds']
+selected_columns = ['rnr'] + [key for key in args.keys if key != 'labelIds'] + ['colorCode']
 data_selected = data[selected_columns]
-
-color_selected = [key for key in args.keys if key == 'colorCode' or key == 'labelIds']
-color_selected = data[color_selected]
-
-header = data_selected.columns.tolist()
 
 # Create a new Excel workbook
 wb = Workbook()
 ws = wb.active
-ws.append(list(data_selected.columns))
+header = [column for column in data_selected.columns if column != 'colorCode']
+ws.append(header)
 
 fill_green = PatternFill(start_color="007500", end_color="007500", fill_type="solid")
 fill_orange = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")
@@ -81,7 +77,7 @@ fill_red = PatternFill(start_color="b30000", end_color="b30000", fill_type="soli
 
 # Iterate through the data and add rows to the worksheet
 for _, row in data.iterrows():
-    row_data = [row[column] for column in data_selected.columns]
+    row_data = [row[column] for column in data_selected.columns if column != 'colorCode']
     ws.append(row_data)
 
     # Calculate color code for cells based on 'hu' column
@@ -106,7 +102,7 @@ for _, row in data.iterrows():
 
 # Apply font color to cells in 'labelIds' column
 if 'labelIds' in args.keys:
-    color_cod_col = color_selected['colorCode']
+    color_cod_col = data_selected['colorCode']
 
     for idx in range(len(color_cod_col)):
         color_code = color_cod_col.iloc[idx]
